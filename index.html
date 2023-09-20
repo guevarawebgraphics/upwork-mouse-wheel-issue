@@ -58,41 +58,42 @@
   <div class="site-wrapper d-flex flex-column h-100">
 
 
-    <!-- Header (Lesson)
-      ================================================== -->
-    <header id="header-lesson" class="header-lesson">
-      <div class="container d-flex h-100">
-        <div class="header-lesson__inner">
-          <div class="header-lesson__col-brand">
-            <a class="header-lesson__brand" href="#">Academy</a>
-          </div>
-          <div class="header-lesson__col-title">
-            <div class="header-lesson__title">Proving Mastery in Security Academy</div>
-          </div>
-          <div class="header-lesson__col-btns">
-            <div class="header-lesson__btns">
+<!-- Header (Lesson)
+================================================== -->
+<header id="header-lesson" class="header-lesson">
+  <div class="container d-flex h-100">
+    <div class="header-lesson__inner">
+      <div class="header-lesson__col-brand">
+        <a class="header-lesson__brand" href="#">Academy</a>
+      </div>
+      <div class="header-lesson__col-title">
+        <div class="header-lesson__title">Proving Mastery in Security Academy</div>
+      </div>
+      <div class="header-lesson__col-btns">
+        <div class="header-lesson__btns">
 
-              <!-- Countdown: Time -->
-              <div class="countdown">
-                <canvas id="countdown-canvas" class="countdown__canvas"></canvas>
-                <div id="countdown-time" class="countdown__time">00:00</div>
-              </div>
-              <!-- Countdown: Time / End -->
-
-              <!-- Save & Exit -->
-              <a href="index.html" class="btn btn-lg btn-outline-accent header-lesson__btn">
-                <span class="header-lesson__btn-text d-none d-md-block">Save & Exit</span>
-                <svg role="img" stroke="currentColor" class="header-lesson__btn-icon d-block d-md-none">
-                  <use xlink:href="assets/images/icons.svg#arrow-right-on-rectangle"></use>
-                </svg>
-              </a>
-              <!-- Save & Exit / End -->
+            <!-- Countdown: Time -->
+            <div class="countdown">
+              <canvas id="countdown-canvas" class="countdown__canvas"></canvas>
+              <div id="countdown-time" class="countdown__time">00:00</div>
             </div>
-          </div>
+            <!-- Countdown: Time / End -->
+
+            <!-- Save & Exit -->
+            <a href="index.html" class="btn btn-lg btn-outline-accent header-lesson__btn">
+              <span class="header-lesson__btn-text d-none d-md-block">Save & Exit</span>
+              <svg role="img" stroke="currentColor" class="header-lesson__btn-icon d-block d-md-none">
+                <use xlink:href="assets/images/icons.svg#arrow-right-on-rectangle"></use>
+              </svg>
+            </a>
+            <!-- Save & Exit / End -->
+
         </div>
       </div>
-    </header>
-    <!-- Header (Lesson) / End -->
+    </div>
+  </div>
+</header>
+<!-- Header (Lesson) / End -->
 
 
 
@@ -428,6 +429,8 @@
 
         el.classList.remove('dragging');
         isDragging = false;
+
+        $(el).css('opacity', 1);
         
         if (!target.classList.contains("draggable-zone")) {
           var holder = source ? source.closest('.draggable-options__holder') : null;
@@ -442,6 +445,7 @@
 
         // Checks if already filled draggable zone
         if (target.classList.contains("draggable-zone")) {
+
           if ( $(target).find(".draggable-options__option").length > 1 ) {
 
             var first_id = $(el).data('id'); 
@@ -449,17 +453,23 @@
 
             var second_id;
             $(target).find('.draggable-options__option').each(function () {
-              second_id = $(this).data('id');
+              if (first_id != $(this).data('id') ) {
+                second_id = $(this).data('id'); 
+              }
+              
             });
+
+
             var second_target = $('#option-' + second_id)[0].outerHTML;
 
             $(target).html(' ');
             $(source).html(' ');
-            $(target).html(first_target);
-            $(source).html(second_target);
 
-            $('#option-' + first_id).attr('style','opacity:1!important;');
-             $('#option-' + second_id).attr('style', 'opacity:1!important;');
+            $(target).html(first_target);  
+            $(source).html(second_target); 
+
+            $('#option-' + first_id).attr('style','opacity:1!important;'); 
+            $('#option-' + second_id).attr('style', 'opacity:1!important;'); 
 
 
           }
