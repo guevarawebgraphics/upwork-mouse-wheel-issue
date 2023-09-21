@@ -386,7 +386,9 @@
 
         if (el && container.classList.contains("draggable-zone") && el.classList.contains("dragging")) {
           // Check if container is empty
-          if (container.querySelector('.draggable-options__option') === null) {
+          console.log(container);
+          if ( !container.querySelector('.draggable-options__option') || container.querySelector('.dragging') ) {
+            console.log('success!');
             container.classList.add('over');
             $(el).css('opacity', 0);
           }
